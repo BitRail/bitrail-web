@@ -1,20 +1,38 @@
+import { Suspense } from 'react';
+import Link from 'next/link';
+import { HealthScoreWidget } from '@/components/bitrail/HealthScoreWidget';
+import { PositionsTable } from '@/components/bitrail/PositionsTable';
+
 export default function DashboardPage() {
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <p className="text-gray-600">Connect your wallet to view your Bitrail portfolio.</p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 gap-6">
-        <Suspense fallback={<div className="p-6 bg-gray-900 rounded-xl">Loading...</div>}>
-          {/* Placeholder for wallet connection and data fetching */}
-          <div className="p-6 bg-gray-900 rounded-xl">
-            <h2 className="text-xl font-bold text-white mb-4">Bitrail Portfolio</h2>
-            <p className="text-gray-400">Connect a wallet to see your positions and health score.</p>
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="max-w-7xl mx-auto py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          <div>
+            <Suspense fallback={<div className="p-6 bg-gray-900 rounded-xl animate-pulse" />}>
+              <HealthScoreWidget health={null} loading={true} />
+            </Suspense>
           </div>
-        </Suspense>
+
+          <div>
+            <Suspense fallback={<div className="p-6 bg-gray-900 rounded-xl animate-pulse" />}>
+              <PositionsTable positions={[]} loading={true} />
+            </Suspense>
+          </div>
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 gap-4">
+          <div>
+            <Link href="/dashboard/alerts" className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors">
+              Manage Alerts
+            </Link>
+          </div>
+          <div>
+            <Link href="/dashboard/actions" className="px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-800 transition-colors">
+              Actions
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
