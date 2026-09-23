@@ -217,7 +217,7 @@ export default function ProtocolsPage() {
           Integrated DeFi Protocols
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl mb-8">
-          Stacks AI integrates with 8 major Bitcoin DeFi protocols, providing 148+ tools for
+          Bitrail integrates with 8 major Bitcoin DeFi protocols, providing 148+ tools for
           comprehensive DeFi operations. From trading and lending to domain registration and
           smart contract development.
         </p>
@@ -431,14 +431,14 @@ export default function ProtocolsPage() {
         <Card className="p-8 bg-gradient-to-r from-cyan-500/10 to-blue-500/5 border-cyan-500/20 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Explore Bitcoin DeFi?</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Start using Stacks AI to interact with all 8 protocols through simple natural language.
+            Start using Bitrail to interact with all 8 protocols through simple natural language.
             No complex UIs, just tell the AI what you want to do.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
               <Link href="/chat">
-                Launch Stacks AI
+                Launch Bitrail
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>

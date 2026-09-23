@@ -24,7 +24,7 @@ const quickStart = [
   {
     step: "1",
     title: "Connect Your Wallet",
-    description: "Connect your Leather or Xverse wallet to start using Stacks AI",
+    description: "Connect your Leather or Xverse wallet to start using Bitrail",
     href: "/docs/getting-started"
   },
   {
@@ -46,7 +46,7 @@ const featuredSections = [
     name: "Getting Started",
     href: "/docs/getting-started",
     icon: BookOpen,
-    description: "New to Stacks AI? Start here for a quick introduction to Bitcoin DeFi with natural language.",
+    description: "New to Bitrail? Start here for a quick introduction to Bitcoin DeFi with natural language.",
     badge: "Popular"
   },
   {
@@ -83,7 +83,7 @@ const allSections = [
     name: "Premium",
     href: "/docs/premium",
     icon: Crown,
-    description: "Unlock advanced features with Stacks AI Premium"
+    description: "Unlock advanced features with Bitrail Premium"
   },
   {
     name: "FAQ",
@@ -108,11 +108,11 @@ export default function DocsPage() {
         </Badge>
 
         <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-          Stacks AI Documentation
+          Bitrail Documentation
         </h1>
 
         <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-          Everything you need to build powerful Bitcoin DeFi applications with Stacks AI.
+          Everything you need to build powerful Bitcoin DeFi applications with Bitrail.
           From quick start guides to advanced protocol integrations across 8 DeFi protocols.
         </p>
 

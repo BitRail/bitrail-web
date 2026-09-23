@@ -195,7 +195,7 @@ export default function ExamplesPage() {
           148+ Tools & Example Queries
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl mb-8">
-          Explore all the natural language queries you can use with Stacks AI. Simply type what you want to do,
+          Explore all the natural language queries you can use with Bitrail. Simply type what you want to do,
           and the AI will execute the appropriate tools across 8 Bitcoin DeFi protocols.
         </p>
 

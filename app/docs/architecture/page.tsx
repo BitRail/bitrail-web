@@ -195,7 +195,7 @@ export default function ArchitecturePage() {
           Bitcoin DeFi Architecture
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl">
-          Stacks AI employs a sophisticated multi-layer architecture designed for the Bitcoin DeFi era.
+          Bitrail employs a sophisticated multi-layer architecture designed for the Bitcoin DeFi era.
           Our system combines modern web technologies, AI processing via MCP, and Stacks blockchain integration
           to deliver conversational Bitcoin DeFi operations at scale.
         </p>

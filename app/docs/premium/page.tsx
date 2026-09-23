@@ -145,7 +145,7 @@ export default function PremiumPage() {
           Unlock Advanced Bitcoin DeFi
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-8">
-          Take your Bitcoin DeFi experience to the next level with Stacks AI Premium.
+          Take your Bitcoin DeFi experience to the next level with Bitrail Premium.
           Advanced features, automation, and insights for serious users and professionals.
         </p>
       </motion.div>
@@ -379,7 +379,7 @@ export default function PremiumPage() {
             <h2 className="text-3xl font-bold">Be Among the First</h2>
           </div>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Premium features are coming soon. Start using Stacks AI today and be notified
+            Premium features are coming soon. Start using Bitrail today and be notified
             when Premium launches with exclusive early access benefits.
           </p>
 

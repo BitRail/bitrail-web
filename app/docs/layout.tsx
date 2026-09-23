@@ -90,7 +90,7 @@ export default function DocsLayout({
                 Documentation
               </Link>
               <p className="text-sm text-muted-foreground">
-                Everything you need to know about Stacks AI
+                Everything you need to know about Bitrail
               </p>
             </div>
 
@@ -132,7 +132,7 @@ export default function DocsLayout({
             <div className="pt-6 border-t">
               <Button asChild variant="outline" className="w-full">
                 <Link href="/chat">
-                  Try Stacks AI
+                  Try Bitrail
                 </Link>
               </Button>
             </div>
@@ -160,7 +160,7 @@ export default function DocsLayout({
                   Documentation
                 </Link>
                 <p className="text-sm text-muted-foreground">
-                  Everything you need to know about Stacks AI
+                  Everything you need to know about Bitrail
                 </p>
               </div>
 

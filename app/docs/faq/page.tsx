@@ -31,23 +31,23 @@ const faqData: FAQItem[] = [
   // Getting Started
   {
     category: "getting-started",
-    question: "What is Stacks AI?",
-    answer: "Stacks AI is an AI-powered Bitcoin DeFi interface that allows you to interact with 8 major Stacks protocols using natural language. Instead of navigating complex DeFi interfaces, you simply tell the AI what you want to accomplish - like 'swap 100 STX for ALEX' or 'check my lending position on Arkadiko' - and it handles the technical complexity for you."
+    question: "What is Bitrail?",
+    answer: "Bitrail is an AI-powered Bitcoin DeFi interface that allows you to interact with 8 major Stacks protocols using natural language. Instead of navigating complex DeFi interfaces, you simply tell the AI what you want to accomplish - like 'swap 100 STX for ALEX' or 'check my lending position on Arkadiko' - and it handles the technical complexity for you."
   },
   {
     category: "getting-started",
-    question: "How do I get started with Stacks AI?",
+    question: "How do I get started with Bitrail?",
     answer: "Getting started is simple: 1) Connect your Leather or Xverse wallet, 2) Start typing what you want to do in natural language, 3) The AI will guide you through each step and handle the blockchain interactions. No technical knowledge of Clarity smart contracts required!"
   },
   {
     category: "getting-started",
     question: "What wallets are supported?",
-    answer: "Stacks AI supports Leather (recommended) and Xverse wallets. Both are excellent Stacks-native wallets with full support for Bitcoin settlement and Clarity smart contracts. Make sure your wallet is connected to the correct network (mainnet or testnet)."
+    answer: "Bitrail supports Leather (recommended) and Xverse wallets. Both are excellent Stacks-native wallets with full support for Bitcoin settlement and Clarity smart contracts. Make sure your wallet is connected to the correct network (mainnet or testnet)."
   },
   {
     category: "getting-started",
-    question: "Is Stacks AI free to use?",
-    answer: "Yes, Stacks AI is free to use. You only pay standard Stacks network fees (in STX) for transactions you choose to execute. The AI interface and all 148+ tools are provided at no additional cost. Built for the Stacks Vibe Coding Hackathon 2025."
+    question: "Is Bitrail free to use?",
+    answer: "Yes, Bitrail is free to use. You only pay standard Stacks network fees (in STX) for transactions you choose to execute. The AI interface and all 148+ tools are provided at no additional cost. Built for the Stacks Vibe Coding Hackathon 2025."
   },
 
   // Wallet & Transactions
@@ -64,7 +64,7 @@ const faqData: FAQItem[] = [
   {
     category: "wallet",
     question: "What about SIP-010 tokens like ALEX or USDA?",
-    answer: "Stacks AI supports all SIP-010 tokens across the ecosystem. Try: 'Send 50 ALEX to [address]' or 'What's my USDA balance?'. The AI automatically handles token contracts and decimals."
+    answer: "Bitrail supports all SIP-010 tokens across the ecosystem. Try: 'Send 50 ALEX to [address]' or 'What's my USDA balance?'. The AI automatically handles token contracts and decimals."
   },
   {
     category: "wallet",
@@ -185,13 +185,13 @@ const faqData: FAQItem[] = [
   },
   {
     category: "technical",
-    question: "How do I use Stacks AI in Claude Desktop?",
+    question: "How do I use Bitrail in Claude Desktop?",
     answer: "Install the Stacks MCP Server following the docs, configure your Claude Desktop with the MCP config file, and restart Claude. Then you can chat with Claude about Bitcoin DeFi directly in the app."
   },
   {
     category: "technical",
     question: "Are my private keys secure?",
-    answer: "Yes! Your private keys never leave your Leather or Xverse wallet. Stacks AI only requests transaction signatures from your wallet - it cannot access your keys or execute transactions without your explicit approval."
+    answer: "Yes! Your private keys never leave your Leather or Xverse wallet. Bitrail only requests transaction signatures from your wallet - it cannot access your keys or execute transactions without your explicit approval."
   },
   {
     category: "technical",
@@ -201,7 +201,7 @@ const faqData: FAQItem[] = [
   {
     category: "technical",
     question: "What's the difference between mainnet and testnet?",
-    answer: "Mainnet uses real STX and tokens with value. Testnet uses test STX for development without risk. Stacks AI works on both - it automatically detects your network from your wallet."
+    answer: "Mainnet uses real STX and tokens with value. Testnet uses test STX for development without risk. Bitrail works on both - it automatically detects your network from your wallet."
   }
 ];
 
@@ -210,7 +210,7 @@ const categories = [
     id: "getting-started",
     name: "Getting Started",
     icon: HelpCircle,
-    description: "Basic questions about Stacks AI"
+    description: "Basic questions about Bitrail"
   },
   {
     id: "wallet",
@@ -340,7 +340,7 @@ export default function FaqPage() {
           Frequently Asked Questions
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mb-8">
-          Find answers to common questions about Stacks AI. From basic wallet operations to advanced
+          Find answers to common questions about Bitrail. From basic wallet operations to advanced
           cross-protocol DeFi strategies on Bitcoin Layer 2.
         </p>
 
@@ -414,13 +414,13 @@ export default function FaqPage() {
           </div>
           <h3 className="text-2xl font-bold mb-4">Still Have Questions?</h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Can't find what you're looking for? Try asking Stacks AI directly -
+            Can't find what you're looking for? Try asking Bitrail directly -
             it's designed to understand and answer questions about Bitcoin DeFi in natural language.
           </p>
           <div className="flex gap-4 justify-center">
             <Button className="bg-cyan-500 hover:bg-cyan-600 text-white">
               <HelpCircle className="w-4 h-4 mr-2" />
-              Try Stacks AI
+              Try Bitrail
             </Button>
             <Button variant="outline">
               <Info className="w-4 h-4 mr-2" />

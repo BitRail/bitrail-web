@@ -1,12 +1,12 @@
-# Stacks AI Roadmap
+# Bitrail Roadmap
 
-Building the future of Bitcoin DeFi accessibility through AI.
+Cross-protocol position monitoring, health scoring, and guarded capital routing for sBTC, stBTC, and Zest positions.
 
 ---
 
 ## Grant Proposal Summary
 
-> **What are we building?** Stacks AI is a natural language interface for Bitcoin DeFi on Stacks. It exposes 144+ operations across ALEX, Velar, BitFlow, Arkadiko, Granite, and PoX through a chat UI and MCP server, letting users trade, lend, and stack without writing code or reading docs. The x402 layer adds pay-per-call monetization for AI agents, creating a sustainable revenue model for MCP tool providers on Stacks.
+> **What are we building?** Bitrail is a natural language interface for Bitcoin DeFi on Stacks. It exposes 144+ operations across ALEX, Velar, BitFlow, Arkadiko, Granite, and PoX through a chat UI and MCP server, letting users trade, lend, and stack without writing code or reading docs. The x402 layer adds pay-per-call monetization for AI agents, creating a sustainable revenue model for MCP tool providers on Stacks.
 >
 > **Who is it for?** STX holders, DeFi users, and AI agent developers who want programmatic access to Bitcoin DeFi without custodial intermediaries.
 >
@@ -80,7 +80,7 @@ Building the future of Bitcoin DeFi accessibility through AI.
 - Unlock premium features through active participation
 - Build your reputation in the Bitcoin DeFi ecosystem
 
-**This is about community, not just features.** We want to celebrate the builders, traders, and innovators using Stacks AI.
+**This is about community, not just features.** We want to celebrate the builders, traders, and innovators using Bitrail.
 
 ---
 
@@ -176,7 +176,7 @@ Always free, always powerful. Access to core DeFi operations.
 - Submit feature requests on GitHub
 - Contribute to open-source development
 
-**Stacks AI is community-driven.** Your feedback shapes our direction.
+**Bitrail is community-driven.** Your feedback shapes our direction.
 
 ---
 
@@ -192,6 +192,6 @@ We're committed to building in public and keeping the community informed of any 
 
 ---
 
-**Stacks AI - Making Bitcoin DeFi Accessible to Everyone**
+**Bitrail - Making Bitcoin DeFi Accessible to Everyone**
 
 *Built during the Stacks Vibe Coding Hackathon 2025*

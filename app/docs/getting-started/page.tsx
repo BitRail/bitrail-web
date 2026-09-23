@@ -87,9 +87,9 @@ export default function GettingStartedPage() {
           <span className="text-muted-foreground">Getting Started</span>
         </Badge>
 
-        <h1 className="text-4xl font-bold mb-4">Welcome to Stacks AI</h1>
+        <h1 className="text-4xl font-bold mb-4">Welcome to Bitrail</h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl">
-          Stacks AI is your AI-powered co-pilot for Bitcoin DeFi on Stacks.
+          Bitrail is your AI-powered co-pilot for Bitcoin DeFi on Stacks.
           This guide will help you get started in just a few minutes.
         </p>
       </motion.div>
@@ -152,11 +152,11 @@ export default function GettingStartedPage() {
             Ready to start?
           </h4>
           <p className="text-muted-foreground mb-4">
-            Launch Stacks AI and connect your wallet to begin exploring Bitcoin DeFi.
+            Launch Bitrail and connect your wallet to begin exploring Bitcoin DeFi.
           </p>
           <Button asChild>
             <Link href="/chat">
-              Launch Stacks AI
+              Launch Bitrail
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
@@ -202,7 +202,7 @@ export default function GettingStartedPage() {
       >
         <h2 className="text-3xl font-bold mb-8">Example Queries</h2>
         <p className="text-muted-foreground mb-8 leading-relaxed">
-          Here are some example questions you can ask Stacks AI:
+          Here are some example questions you can ask Bitrail:
         </p>
 
         <div className="space-y-4">

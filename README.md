@@ -1,16 +1,27 @@
-# Stacks AI ~ Frontend
+# Bitrail — Risk Rails for Bitcoin on Stacks
 
-![Stacks AI Banner](https://raw.githubusercontent.com/Stack-AI-MCP/stacks-mcp-server/main/docs/images/stacksAIBanner.png)
+![Bitrail Banner](https://raw.githubusercontent.com/BitRail/bitrail-web/main/docs/images/bitrailBanner.png)
 
-## Roadmap
+## Overview
 
-![Stacks AI Roadmap](https://raw.githubusercontent.com/Stack-AI-MCP/stacks-mcp-server/main/docs/images/stacksAiRoadmap.png)
+Cross-protocol position monitoring, health scoring, and guarded capital routing for sBTC, stBTC, and Zest positions.
 
-**Talk to Bitcoin. Trade, lend, stack - through conversation.**
+## Risk Model
 
-Stacks AI makes the entire Bitcoin DeFi ecosystem accessible through natural language. Access ALEX, Velar, BitFlow, Arkadiko, Granite, and more - just by talking.
+healthFactor = totalCollateralUSD / (totalDebtUSD / liquidationThreshold)
 
-Part of the **Stacks AI** project - a comprehensive AI-powered interface for Bitcoin DeFi built on Stacks.
+- healthFactor > 1.5 → SAFE (green)
+- healthFactor 1.0–1.5 → WATCH (yellow)
+- healthFactor < 1.0 → DANGER (red) — liquidatable
+
+Liquidation Distance: distancePct = ((healthFactor - 1.0) / healthFactor) * 100
+
+Bitrail gives users and protocols a shared cross-protocol view of position health, liquidation distance, and safe rebalancing — so Bitcoin capital can move deeper into the Stacks ecosystem without opaque risk.
+
+Not a DEX. Not a lending protocol. Not a yield farm. Not a portfolio tracker.
+It is infrastructure: risk intelligence + policy-constrained routing that other Stacks apps can integrate.
+
+Part of the **Bitrail** grant - Stacks Endowment Q3 2026, Theme: "Put the Rails to Work"
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
@@ -46,13 +57,13 @@ Part of the **Stacks AI** project - a comprehensive AI-powered interface for Bit
 
 ```mermaid
 graph LR
-    User[👤 You] -->|"swap 100 STX for sBTC"| AI[🤖 StacksAI]
-    AI -->|Executes| DEX[ALEX/Velar/BitFlow]
-    AI -->|Executes| Lending[Arkadiko/Granite]
-    AI -->|Executes| Stacking[PoX Cycles]
-    AI -->|Executes| NFTs[SIP-009 NFTs]
+    User[👤 You] -->|"Provide sBTC address"| BR[🤖 Bitrail]
+    BR -->|Positions| DEX[ALEX/Velar/BitFlow]
+    BR -->|Health| Lending[Arkadiko/Granite]
+    BR -->|Risk| Stacking[PoX Cycles]
+    BR -->|Alerts| NFTs[SIP-009 NFTs]
 
-    style AI fill:#fc8d36
+    style BR fill:#ea580c
     style User fill:#5546ff
 ```
 
@@ -66,21 +77,21 @@ graph LR
 
 ### System Overview
 
-![Stacks AI Architecture](https://raw.githubusercontent.com/Stack-AI-MCP/stacks-mcp-server/main/docs/images/stacksAiArchitecture.png)
+![Bitrail Architecture](https://raw.githubusercontent.com/BitRail/bitrail-web/main/docs/images/bitrailArchitecture.png)
 
 ```mermaid
 graph TB
-    subgraph "Frontend - Stacks AI Terminal"
+    subgraph "Frontend - Bitrail Terminal"
         A[Next.js 15 App]
         B[React 19 Components]
-        C[AI Chat Interface]
+        C[Health Score Widget]
         D[Wallet Integration]
     end
 
-    subgraph "AI Layer"
-        E[Vercel AI SDK]
-        F[MCP Server<br/>144+ Tools]
-        G[Streaming Engine]
+    subgraph "Risk Engine"
+        E[Risk Engine]
+        F[Health Score API]
+        G[Liquidation Monitor]
     end
 
     subgraph "Stacks Wallet Layer"
@@ -93,13 +104,12 @@ graph TB
         K[ALEX Protocol]
         L[Velar DEX]
         M[BitFlow]
-        N[Charisma]
-        O[Arkadiko]
-        P[Granite]
-        Q[PoX Stacking]
+        N[Arkadiko]
+        O[Granite]
+        P[Zest]
     end
 
-    subgraph "Stacks Blockchain"
+    subgraph "Bitcoin Blockchain"
         R[Bitcoin Layer 2]
         S[Smart Contracts]
         T[Bitcoin Security]
@@ -111,27 +121,24 @@ graph TB
     E --> F
     F --> G
     D --> H
-    H --> I
-    H --> J
+    D --> J
     F --> K
     F --> L
     F --> M
     F --> N
     F --> O
     F --> P
-    F --> Q
     K --> R
     L --> R
     M --> R
     N --> R
     O --> R
     P --> R
-    Q --> R
     R --> S
     S --> T
 
     style A fill:#5546ff
-    style F fill:#fc8d36
+    style F fill:#ea580c
     style R fill:#f7931a
 ```
 
@@ -139,42 +146,27 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph "MCP Server Core"
-        Core[Plugin Manager]
+    subgraph "Bitrail Core"
+        Core[Risk Engine]
     end
 
-    subgraph "Account Plugins"
-        A1[getAccountInfo]
-        A2[getTransactionHistory]
-        A3[searchById]
-        A4[getAccountNonces]
+    subgraph "Protocol Plugins"
+        D1[Zest<br/>borrow/supply]
+        D2[BitFlow<br/>LP positions]
+        D3[StackingDAO<br/>stBTC]
+        D4[ vaults<br/>dormant monitoring]
     end
 
-    subgraph "DEX Plugins"
-        D1[ALEX<br/>11 tools]
-        D2[Velar<br/>9 tools]
-        D3[BitFlow<br/>5 tools]
-        D4[Charisma<br/>5 tools]
+    subgraph "Wallet Layer"
+        H[Stacks Connect]
+        I[Leather Wallet]
+        J[Xverse Wallet]
     end
 
-    subgraph "Lending Plugins"
-        L1[Arkadiko<br/>7 tools]
-        L2[Granite<br/>6 tools]
-    end
-
-    subgraph "Core Stacks"
-        C1[STX Transfer]
-        C2[Contract Calls]
-        C3[NFT Operations]
-        C4[PoX Stacking]
-    end
-
-    Core --> A1 & A2 & A3 & A4
     Core --> D1 & D2 & D3 & D4
-    Core --> L1 & L2
-    Core --> C1 & C2 & C3 & C4
+    Core --> H & I & J
 
-    style Core fill:#fc8d36
+    style Core fill:#ea580c
 ```
 
 ### Data Flow
@@ -183,97 +175,59 @@ graph TB
 sequenceDiagram
     participant User
     participant Frontend
-    participant AI
-    participant MCP
-    participant Wallet
-    participant Stacks
+    participant BR[Bitrail]
+    participant API[Risk API]
+    participant Wallet[Stacks Wallet]
+    participant Chain[Bitcoin Chain]
 
-    User->>Frontend: "swap 100 STX for ALEX"
-    Frontend->>AI: Process natural language
-    AI->>MCP: Call alexSwapTokens tool
-    MCP->>MCP: Build transaction
-    MCP->>Frontend: Return unsigned tx
-    Frontend->>Wallet: Request signature
-    Wallet->>User: Confirm transaction?
-    User->>Wallet: Approve
-    Wallet->>Stacks: Broadcast signed tx
-    Stacks->>Frontend: Transaction hash
-    Frontend->>User: "✅ Swap executed"
+    User->>Frontend: "Check health of SP2VCQJ..."
+    Frontend->>BR: Fetch positions + health
+    BR->>API: GET /api/v1/bitrail/health
+    API->>Wallet: Read Zest/StackingDAO states
+    API->>Chain: Read-onchain reserve data
+    API-->>BR: Health score + distances
+    BR-->>Frontend: Score 2.41 / 15% away
+    Frontend->>User: "SAFE / WATCH / DANGER"
 ```
 
 ## Features
 
-### AI-Powered Bitcoin DeFi
-- **Natural Language Processing**: Convert conversational commands to DeFi operations
-- **Context-Aware Responses**: AI understands Stacks and Bitcoin DeFi terminology
-- **Tool Execution**: Automated execution of DeFi operations through 100+ MCP tools
-- **Progressive Loading**: Real-time streaming of AI responses and blockchain data
+### Risk Intelligence
+- **Cross-Protocol Position Health**: Monitor Zest, StackingDAO, Bitflow, and wallet positions in one view
+- **Health Factor Calculation**: `totalCollateralUSD / (totalDebtUSD / liquidationThreshold)` 
+- **Liquidation Distance**: Percentage and USD/BTC distance to liquidation
+- **Per-Assumption Disclosure**: All assumptions visible in UI accordion
 
-### DeFi Protocol Operations
+### Dashboard Portfolio
+- Connect Leather / Xverse wallet
+- Render: HealthScoreWidget + PositionsList + AlertsSummary
+- API calls: GET /api/v1/bitrail/health/{address}, GET /api/v1/bitrail/positions/{address}
 
-#### DEX Trading (ALEX, Velar, BitFlow, Charisma)
-- Multi-hop swaps with optimal routing (up to 4 hops on ALEX)
-- Liquidity pool analytics with TVL, volume, and APY
-- Real-time token prices and 24h changes
-- Slippage protection and MEV resistance
+### Health Score Widget
+- Large health factor number (e.g. "2.41")
+- Status badge: SAFE / WATCH / DANGER (colored)
+- Liquidation distance: "X% away | $X | X BTC"
+- Collateral: $X vs Debt: $X
+- Assumptions disclosure toggle (accordion showing risk model assumptions)
+- "Model: bitrail-risk-v0.1" label
+- Last updated timestamp
 
-#### Lending Protocols (Arkadiko, Granite)
-- Collateralized borrowing with health factor monitoring
-- Yield-bearing deposits with real-time APY
-- Vault management with liquidation warnings
-- Multi-collateral support
+### Positions Table
+- Protocol | Asset | Type | Balance (token) | Value (USD) | Value (BTC)
+- Group rows by protocol (Zest section, StackingDAO section, Wallet section)
+- Type badges: collateral=blue, debt=red, liquid=green, lp=purple
+- Empty state: "No positions found. Connect a wallet with Zest or StackingDAO positions."
+- Show total row at bottom
 
-#### Stacking (Proof of Transfer)
-- Stack STX to earn Bitcoin yields
-- Delegation to stacking pools
-- PoX cycle tracking and reward estimation
-- Unlock height monitoring
+### Alerts
+- User-set thresholds for health factor monitoring
+- Fire when threshold crossed (in-app + webhook only for MVP)
+- Create alert via UI form
 
-#### Token & NFT Management
-- STX balance tracking with locked amounts
-- SIP-010 fungible token balances
-- SIP-009 NFT collections
-- Token metadata and contract information
-
-#### Blockchain Data
-- Block information and transaction details
-- Network statistics and consensus data
-- Contract interaction and event tracking
-- Address balance history
-
-#### Clarity Smart Contract Development
-- Generate complete Clarinet project setups with templates
-- Create SIP-009 NFT and SIP-010 FT contracts
-- Generate comprehensive test suites (unit, integration, security)
-- Configure projects for different networks (mainnet, testnet, devnet)
-
-## Protocol Integrations
-
-### **ALEX Protocol** (11 tools)
-Comprehensive AMM and orderbook DEX with launchpad features. Supports 1-4 hop multi-path swaps for optimal pricing across the liquidity network.
-
-### **Velar DEX** (9 tools)
-Multi-chain DEX with advanced liquidity pools. Provides real-time price feeds and cross-chain swap capabilities.
-
-### **BitFlow** (5 tools)
-Stable-focused DEX with concentrated liquidity. Optimized for stablecoin swaps and low slippage trading.
-
-### **Charisma** (5 tools)
-Composable DeFi protocol with customizable vaults. Includes the Blaze intent protocol for advanced trading strategies.
-
-### **Arkadiko Protocol** (8 tools) ⚠️ Mainnet Only
-Decentralized stablecoin protocol issuing USDA. Enables collateralized borrowing and yield farming with STX.
-
-**Note**: Arkadiko is only deployed on **mainnet**. Testnet operations will return an error. For local development and testing, deploy Arkadiko contracts to a local mocknet environment.
-
-### **Granite Finance** (6 tools)
-Multi-collateral lending market with isolated risk pools. Supports various Stacks tokens as collateral.
-
-### **Bitcoin Name Service** (BNS)
-Decentralized naming system for Stacks addresses using .btc domains. Fully integrated for human-readable addresses.
-
-### **Clarinet Development Tools** (4 tools)
-Smart contract development toolkit for Clarity developers. Generate projects, contracts, tests, and network configurations for Stacks blockchain development.
+### Guarded Actions
+- "Guarded Repay on Zest" - only execute if post-check health ≥ policy minimum
+- Show clear disclaimer: "Not financial advice. Verify on-chain before signing."
+- Router fails closed: if health check fails, no action executes
 
 ## Technology Stack
 
@@ -458,12 +412,10 @@ MIT License - see LICENSE file for complete terms and conditions.
 
 ## Summary
 
-**Stacks AI Frontend** is the user-facing component of the Stacks AI project, providing a natural language chat interface to interact with Bitcoin DeFi on Stacks Layer 2. Built with Next.js 15, React 19, and the Vercel AI SDK, it integrates with the Stacks AI MCP Server to expose 148+ DeFi operations through conversational AI.
+**Bitrail Frontend** is the user-facing component of the Bitrail project, providing a natural language chat interface to interact with Bitcoin DeFi on Stacks Layer 2. Built with Next.js 15, React 19, and the Vercel AI SDK, it integrates with the Bitrail MCP Server to expose 148+ DeFi operations through conversational AI.
 
 The frontend implements real-time AI streaming, Stacks wallet integration (Leather/Xverse), and a comprehensive component library for displaying DeFi data. It follows modern React patterns with TypeScript type safety and responsive design.
 
 ---
 
-**Stacks AI - Talk to Bitcoin**
-
-Making Bitcoin DeFi as simple as conversation.
+**Bitrail** — Risk rails for productive Bitcoin on Stacks

@@ -218,7 +218,7 @@ const roadmapPhases = [
       },
       {
         title: "API Access",
-        description: "Build on top of Stacks AI infrastructure",
+        description: "Build on top of Bitrail infrastructure",
         status: "planned",
         icon: Code,
         blurred: true
@@ -267,7 +267,7 @@ export default function RoadmapPage() {
 
             <Button size="lg" asChild className="text-lg px-8 py-6">
               <Link href="/chat">
-                Try Stacks AI
+                Try Bitrail
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
@@ -398,7 +398,7 @@ export default function RoadmapPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild className="text-lg px-8 py-6">
                 <Link href="/chat">
-                  Try Stacks AI
+                  Try Bitrail
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>

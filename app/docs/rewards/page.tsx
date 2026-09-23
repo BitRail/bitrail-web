@@ -46,7 +46,7 @@ export default function RewardsDocsPage() {
           Earn While You Build
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mb-8">
-          Stacks AI will revolutionize Bitcoin DeFi by rewarding every action you take.
+          Bitrail will revolutionize Bitcoin DeFi by rewarding every action you take.
           Earn real value while building, transacting, and contributing to the Bitcoin ecosystem.
         </p>
 
@@ -152,7 +152,7 @@ export default function RewardsDocsPage() {
             </div>
             <h3 className="text-xl font-semibold mb-3">1. Take Action</h3>
             <p className="text-muted-foreground">
-              Perform any DeFi operation through Stacks AI - swap tokens, provide liquidity,
+              Perform any DeFi operation through Bitrail - swap tokens, provide liquidity,
               borrow assets, or register domains.
             </p>
           </Card>
@@ -386,7 +386,7 @@ export default function RewardsDocsPage() {
               <div className="w-8 h-8 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-2">
                 <span className="text-cyan-500 font-bold">1</span>
               </div>
-              <p className="text-sm text-muted-foreground">Start using Stacks AI</p>
+              <p className="text-sm text-muted-foreground">Start using Bitrail</p>
             </div>
             <div className="text-center">
               <div className="w-8 h-8 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-2">
@@ -406,7 +406,7 @@ export default function RewardsDocsPage() {
             <Button asChild size="lg" className="bg-cyan-500 hover:bg-cyan-600 text-white">
               <Link href="/chat">
                 <Sparkles className="w-5 h-5 mr-2" />
-                Start Using Stacks AI
+                Start Using Bitrail
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
