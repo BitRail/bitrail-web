@@ -18,8 +18,8 @@
         --color-app-card: #FFFFFF;
         --color-app-border: #E5E7EB;
         --color-app-hover: #F9FAFB;
-        --color-accent-indigo: #4F46E5;
-        --color-accent-indigo-hover: #4338CA;
+        --color-accent-indigo: #EA580C;
+        --color-accent-indigo-hover: #C2410C;
         --color-accent-gold: #D97706;
         --color-accent-gold-hover: #B45309;
         --color-accent-emerald: #059669;
@@ -78,6 +78,17 @@
 
     h1, h2, h3 {
         font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* Syne for display/accent elements — badges, labels, nav, stats */
+    .font-display,
+    nav a,
+    .badge,
+    [data-badge],
+    .stat-label,
+    button,
+    .sidebar-label {
+        font-family: 'Syne', sans-serif;
     }
 }
 

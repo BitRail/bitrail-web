@@ -1,14 +1,31 @@
 import type { NextConfig } from "next";
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
 const nextConfig: NextConfig = {
   experimental: {},
   typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
     ignoreDuringBuilds: true,
+  },
+  // Proxy all backend API calls to sbtc-pay (avoids CORS and the HTML 404 error)
+  async rewrites() {
+    return [
+      {
+        source: "/api/v1/:path*",
+        destination: `${BACKEND_URL}/api/v1/:path*`,
+      },
+      {
+        source: "/api/chainhooks/:path*",
+        destination: `${BACKEND_URL}/api/chainhooks/:path*`,
+      },
+      {
+        source: "/api/cron/:path*",
+        destination: `${BACKEND_URL}/api/cron/:path*`,
+      },
+    ];
   },
   images: {
     remotePatterns: [

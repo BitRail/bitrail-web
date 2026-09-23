@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { connect, disconnect, isConnected, getLocalStorage } from '@stacks/connect';
+import { connect, disconnect, isConnected } from '@stacks/connect';
 import { useState, useEffect } from 'react';
 import { Wallet } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
@@ -30,13 +30,15 @@ export function StacksConnectButton({
       setConnected(isConn);
 
       if (isConn) {
-        const userData = getLocalStorage();
-        const stxAddress = userData?.addresses?.stx?.[0]?.address || null;
+        // v8: read address directly from localStorage key set by connect()
+        const stored = localStorage.getItem('stacks-wallet') || localStorage.getItem('blockstack') || '';
+        let stxAddress: string | null = null;
+        try {
+          const parsed = JSON.parse(stored);
+          stxAddress = parsed?.addresses?.stx?.[0]?.address || parsed?.profile?.stxAddress?.testnet || null;
+        } catch {}
         setAddress(stxAddress);
-
-        if (stxAddress && onConnect) {
-          onConnect(stxAddress);
-        }
+        if (stxAddress && onConnect) onConnect(stxAddress);
       } else {
         setAddress(null);
       }

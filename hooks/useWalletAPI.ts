@@ -1,6 +1,6 @@
 'use client';
 
-import { getLocalStorage, isConnected } from '@stacks/connect';
+import { isConnected } from '@stacks/connect';
 import { useCallback } from 'react';
 import { useWalletAuth } from './use-wallet-auth';
 

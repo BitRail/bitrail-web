@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Brain, Shield, Zap, Github, Terminal, MessageSquare, Sparkles, Lock, TrendingUp, Layers, Box, ExternalLink } from "lucide-react";
+import { ArrowRight, Shield, Zap, Lock, TrendingUp, Layers, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -9,461 +9,284 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
 const protocols = [
-  { name: "ALEX", description: "AMM & Orderbook DEX", color: "from-blue-500 to-cyan-500" },
-  { name: "Velar", description: "Multi-chain DEX", color: "from-purple-500 to-pink-500" },
-  { name: "BitFlow", description: "Stable-focused DEX", color: "from-orange-500 to-yellow-500" },
-  { name: "Charisma", description: "Composable Vaults", color: "from-green-500 to-emerald-500" },
-  { name: "Arkadiko", description: "Lending & USDA", color: "from-red-500 to-orange-500" },
-  { name: "Zest", description: "Bitcoin Capital Markets", color: "from-indigo-500 to-purple-500" },
-  { name: "Granite", description: "Multi-collateral Lending", color: "from-gray-400 to-slate-500" },
-  { name: "STX Core", description: "Stacking & sBTC", color: "from-orange-400 to-amber-500" },
-];
-
-const conversations = [
-  { user: "Swap 100 STX for sBTC", ai: "Best rate on ALEX: 0.0042 sBTC. Ready to execute?" },
-  { user: "What's the stacking APY right now?", ai: "Current PoX cycle: 8.2% APY paid in BTC." },
-  { user: "Lend 5000 USDA on Arkadiko", ai: "Rate: 12.5% APY. Collateral required: 150%." },
+  { name: "Zest",     description: "Bitcoin Capital Markets", color: "from-green-500 to-emerald-500" },
+  { name: "Bitflow",  description: "sBTC/STX Liquidity",      color: "from-blue-500 to-cyan-500" },
+  { name: "ALEX",     description: "DeFi Hub & DEX",          color: "from-purple-500 to-pink-500" },
+  { name: "Stacking", description: "Native BTC Yield via PoX",color: "from-orange-400 to-amber-500" },
+  { name: "Arkadiko", description: "Lending & USDA",          color: "from-red-500 to-orange-500" },
+  { name: "Granite",  description: "Multi-collateral Lending", color: "from-gray-400 to-slate-500" },
 ];
 
 const stats = [
-  { value: "144+", label: "Live Tools", icon: Zap },
-  { value: "8+", label: "DeFi Protocols", icon: Layers },
-  { value: "100%", label: "Bitcoin Secured", icon: Shield },
-  { value: "0", label: "Keys Stored", icon: Lock },
+  { value: "$545M+", label: "sBTC TVL on Stacks",  icon: TrendingUp },
+  { value: "99%",    label: "Bitcoin sitting idle", icon: Lock },
+  { value: "4+",     label: "DeFi Protocols",       icon: Layers },
+  { value: "100%",   label: "Non-Custodial",         icon: Shield },
 ];
 
-const useCases = [
-  { title: "DEX Aggregation", desc: "Finds the best swap rate across ALEX, Velar, BitFlow, and Charisma automatically.", icon: TrendingUp },
-  { title: "BTC Yield via Stacking", desc: "Lock STX, earn Bitcoin. Get current APY, cycle info, and handle delegation in one message.", icon: Shield },
-  { title: "Lending & Borrowing", desc: "Compare rates on Arkadiko and Granite, supply collateral, and borrow — all through conversation.", icon: Layers },
-  { title: "NFT Management", desc: "Browse your Bitcoin NFTs, check floor prices, list or transfer — without leaving the chat.", icon: Box },
-  { title: "sBTC Bridge", desc: "Deposit BTC to Stacks or withdraw to mainnet with real-time status updates.", icon: Zap },
-  { title: "Portfolio Analytics", desc: "Ask what your portfolio is worth or show your yield positions — instant, comprehensive answers.", icon: Brain },
+const features = [
+  {
+    title: "sBTC Payments",
+    description: "Accept Bitcoin payments like Stripe — non-custodial, instant finality, real-time webhooks. Your customers pay in sBTC, funds go directly to your wallet.",
+    icon: Zap,
+    color: "text-blue-600",
+    bg: "bg-blue-50",
+    href: "/dashboard",
+  },
+  {
+    title: "Dormant Vaults",
+    description: "Deploy idle sBTC into Zest, Bitflow, ALEX, or Stacking automatically. Set your own exit conditions — minimum yield, max risk score, liquidation triggers — and your vault exits itself.",
+    icon: Shield,
+    color: "text-orange-600",
+    bg: "bg-orange-50",
+    href: "/dashboard/vaults",
+  },
+  {
+    title: "Protocol Intelligence",
+    description: "Live health monitoring across all major Stacks DeFi protocols. Real-time TVL, APY, risk scores, and utilization rates power your vault's autonomous decisions.",
+    icon: TrendingUp,
+    color: "text-green-600",
+    bg: "bg-green-50",
+    href: "/dashboard/protocols",
+  },
 ];
 
-const navLinks = [
-  { name: "About", href: "/about" },
-  { name: "Docs", href: "/docs" },
-  { name: "Roadmap", href: "/roadmap" },
+const vaultSteps = [
+  { step: "1", title: "Choose a protocol", desc: "Zest, Bitflow, ALEX, or native Stacking" },
+  { step: "2", title: "Set your conditions", desc: "Min yield %, max risk score, liquidation triggers" },
+  { step: "3", title: "Deposit sBTC", desc: "Funds deploy non-custodially via Clarity contracts" },
+  { step: "4", title: "Vault monitors itself", desc: "Exits automatically if any condition is breached" },
 ];
 
-export default function LandingPage() {
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-app-bg font-sans">
-
-      {/* ── Header ── */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-app-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className="font-serif font-bold text-xl tracking-tight text-text-main">
-              Stacks<span className="italic text-accent-indigo">AI</span>
-            </span>
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((l) => (
-              <Link key={l.href} href={l.href} className="text-sm text-text-dim hover:text-text-main transition-colors">
-                {l.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* CTA + mobile menu */}
+    <div className="min-h-screen bg-black text-white">
+      {/* Nav */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">₿</span>
+            </div>
+            <span className="font-semibold text-white">Lava</span>
+          </div>
+          <div className="hidden md:flex items-center gap-6 text-sm text-gray-400">
+            <Link href="/docs" className="hover:text-white transition-colors">Docs</Link>
+            <Link href="/dashboard/protocols" className="hover:text-white transition-colors">Protocols</Link>
+            <Link href="/about" className="hover:text-white transition-colors">About</Link>
+            <Link href="/roadmap" className="hover:text-white transition-colors">Roadmap</Link>
+          </div>
           <div className="flex items-center gap-3">
-            <Button asChild size="sm" className="hidden sm:flex bg-accent-indigo hover:bg-accent-indigo-hover text-white rounded-xl shadow-premium">
-              <Link href="/chat">
-                Launch App <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-              </Link>
-            </Button>
+            <Link href="/login" className="hidden md:block text-sm text-gray-400 hover:text-white transition-colors">
+              Sign in
+            </Link>
+            <Link href="/register">
+              <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white border-0">
+                Get started
+              </Button>
+            </Link>
+            {/* Mobile menu */}
             <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden h-9 w-9">
-                  <Menu className="h-4 w-4" />
-                </Button>
+              <SheetTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="sm"><Menu className="w-5 h-5" /></Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-white">
-                <nav className="flex flex-col gap-6 mt-8">
-                  <span className="font-serif font-bold text-xl text-text-main">
-                    Stacks<span className="italic text-accent-indigo">AI</span>
-                  </span>
-                  {navLinks.map((l) => (
-                    <Link key={l.href} href={l.href} className="text-text-dim hover:text-text-main transition-colors">
-                      {l.name}
-                    </Link>
-                  ))}
-                  <Button asChild className="bg-accent-indigo text-white rounded-xl mt-2">
-                    <Link href="/chat">Launch App</Link>
-                  </Button>
-                </nav>
+              <SheetContent side="right" className="bg-gray-950 border-gray-800 text-white">
+                <div className="flex flex-col gap-4 mt-8 text-sm">
+                  <Link href="/docs" className="text-gray-400 hover:text-white">Docs</Link>
+                  <Link href="/dashboard/protocols" className="text-gray-400 hover:text-white">Protocols</Link>
+                  <Link href="/about" className="text-gray-400 hover:text-white">About</Link>
+                  <Link href="/roadmap" className="text-gray-400 hover:text-white">Roadmap</Link>
+                  <Link href="/login" className="text-gray-400 hover:text-white">Sign in</Link>
+                </div>
               </SheetContent>
             </Sheet>
           </div>
         </div>
-      </header>
+      </nav>
 
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-white">
-        {/* Subtle background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-accent-indigo/5 via-transparent to-amber-50/40 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-indigo/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-24 md:py-36">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-            {/* Left */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="space-y-8"
-            >
-              <Badge className="border-accent-indigo/30 bg-accent-indigo/5 text-accent-indigo font-medium px-3 py-1 rounded-full">
-                <Sparkles className="mr-1.5 h-3 w-3" />
-                First Comprehensive MCP for Bitcoin DeFi
-              </Badge>
-
-              <div className="space-y-4">
-                <h1 className="font-serif font-bold text-6xl md:text-7xl leading-[1.05] tracking-tight text-text-main">
-                  Talk to<br />
-                  <span className="italic text-accent-indigo">Bitcoin.</span>
-                </h1>
-                <p className="text-xl text-text-dim leading-relaxed max-w-md">
-                  Trade, lend, and stack across 8 DeFi protocols — just by typing what you want.
-                </p>
-              </div>
-
-              {/* Chat preview */}
-              <div className="bg-app-bg border border-app-border rounded-2xl p-5 space-y-4 shadow-floating max-w-md">
-                <div className="flex items-center gap-2 text-xs text-text-pale">
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                  <span className="font-mono">stacks-ai · live</span>
-                </div>
-                {conversations.map((conv, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.35 + 0.4 }}
-                    className="space-y-1.5"
-                  >
-                    <div className="flex items-start gap-2">
-                      <span className="text-accent-indigo font-mono text-xs mt-0.5">›</span>
-                      <span className="text-text-main text-sm font-medium">{conv.user}</span>
-                    </div>
-                    <div className="flex items-start gap-2 pl-4">
-                      <MessageSquare className="h-3.5 w-3.5 text-accent-emerald mt-0.5 shrink-0" />
-                      <span className="text-text-dim text-sm">{conv.ai}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button asChild size="lg" className="bg-accent-indigo hover:bg-accent-indigo-hover text-white rounded-xl px-8 shadow-premium hover:shadow-floating transition-all duration-200 active:scale-95">
-                  <Link href="/chat">
-                    Launch App <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="rounded-xl px-8 border-app-border text-text-dim hover:text-text-main hover:border-accent-indigo/40">
-                  <Link href="/docs">
-                    <Github className="mr-2 h-4 w-4" /> View Docs
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="flex items-center gap-6 text-sm text-text-pale">
-                <span className="flex items-center gap-1.5"><Zap className="h-3.5 w-3.5 text-accent-indigo" /> 144+ tools live</span>
-                <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-accent-indigo" /> Non-custodial</span>
-                <span className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5 text-accent-indigo" /> Open source</span>
-              </div>
-            </motion.div>
-
-            {/* Right — floating protocol cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="hidden lg:grid grid-cols-2 gap-4"
-            >
-              {protocols.map((p, idx) => (
-                <motion.div
-                  key={p.name}
-                  animate={{ y: [0, idx % 2 === 0 ? -8 : 8, 0] }}
-                  transition={{ duration: 3 + idx * 0.3, repeat: Infinity, ease: "easeInOut", delay: idx * 0.2 }}
-                  className={`bg-gradient-to-br ${p.color} p-px rounded-2xl shadow-premium`}
-                >
-                  <div className="bg-white rounded-2xl p-5 h-28 flex flex-col justify-between">
-                    <div className="flex items-center justify-between">
-                      <span className="font-serif font-bold text-text-main">{p.name}</span>
-                      <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                    </div>
-                    <span className="text-xs text-text-dim">{p.description}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Stats ── */}
-      <section className="py-16 bg-app-bg border-y border-app-border">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((s, idx) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <div className="inline-flex p-3 bg-accent-indigo/8 rounded-xl mb-3">
-                  <s.icon className="h-6 w-6 text-accent-indigo" />
-                </div>
-                <div className="font-serif font-bold text-4xl text-text-main">{s.value}</div>
-                <div className="text-sm text-text-dim mt-1">{s.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── How it works ── */}
-      <section className="py-28 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-serif font-bold text-4xl md:text-5xl text-text-main mb-4">
-              DeFi without the <span className="italic text-accent-indigo">friction</span>
-            </h2>
-            <p className="text-lg text-text-dim max-w-2xl mx-auto">
-              Stop switching between five different protocol UIs. One conversation handles everything.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { n: "01", icon: Terminal, title: "Say what you want", body: "Type naturally — \"swap 100 STX for sBTC\" or \"what's the best yield right now?\" No forms, no menus." },
-              { n: "02", icon: Brain, title: "AI finds the best path", body: "StacksAI picks the right protocol, calculates the optimal route, and prepares the transaction." },
-              { n: "03", icon: Shield, title: "You approve, Bitcoin settles", body: "Review and sign in Leather or Xverse. Your keys never leave your wallet. Bitcoin finality." },
-            ].map((step, idx) => (
-              <motion.div
-                key={step.n}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.15 }}
-                viewport={{ once: true }}
-                className="relative p-8 bg-app-bg border border-app-border rounded-2xl hover:shadow-floating hover:border-accent-indigo/30 transition-all duration-300 group"
-              >
-                <span className="font-serif text-5xl font-bold text-accent-indigo/10 absolute top-6 right-6 select-none">{step.n}</span>
-                <step.icon className="h-10 w-10 text-accent-indigo mb-5" />
-                <h3 className="font-serif font-bold text-xl text-text-main mb-3">{step.title}</h3>
-                <p className="text-text-dim leading-relaxed">{step.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Protocol grid ── */}
-      <section className="py-28 bg-app-bg">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
-            <h2 className="font-serif font-bold text-4xl md:text-5xl text-text-main mb-4">
-              Every protocol. <span className="italic text-accent-indigo">One interface.</span>
-            </h2>
-            <p className="text-lg text-text-dim max-w-2xl mx-auto">
-              From swaps to loans, stacking to NFTs — the complete Bitcoin DeFi stack, accessible through conversation.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {protocols.map((p, idx) => (
-              <motion.div
-                key={p.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.05 }}
-                viewport={{ once: true }}
-                className={`bg-gradient-to-br ${p.color} p-px rounded-2xl hover:scale-105 transition-transform duration-200`}
-              >
-                <div className="bg-white rounded-2xl p-5 h-28 flex flex-col justify-between">
-                  <span className="font-serif font-bold text-text-main">{p.name}</span>
-                  <span className="text-xs text-text-dim">{p.description}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-text-pale text-sm mt-8"
-          >
-            MCP-powered architecture — more protocols added every week.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* ── Use cases ── */}
-      <section className="py-28 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
-            <h2 className="font-serif font-bold text-4xl md:text-5xl text-text-main mb-4">
-              Real operations. <span className="italic text-accent-indigo">Zero complexity.</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {useCases.map((u, idx) => (
-              <motion.div
-                key={u.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.08 }}
-                viewport={{ once: true }}
-                className="p-6 bg-app-bg border border-app-border rounded-2xl hover:shadow-floating hover:border-accent-indigo/30 transition-all duration-300 group"
-              >
-                <u.icon className="h-8 w-8 text-accent-indigo mb-4 group-hover:scale-110 transition-transform duration-200" />
-                <h3 className="font-serif font-bold text-lg text-text-main mb-2">{u.title}</h3>
-                <p className="text-sm text-text-dim leading-relaxed">{u.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Why StacksAI ── */}
-      <section className="py-28 bg-app-bg">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
-            <h2 className="font-serif font-bold text-4xl md:text-5xl text-text-main mb-4">
-              Why <span className="italic text-accent-indigo">StacksAI</span>?
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {[
-              { icon: Shield, color: "text-amber-500", title: "Bitcoin Security", body: "Every transaction settles on Bitcoin through Stacks' Proof-of-Transfer. Real finality, not a sidechain." },
-              { icon: Lock, color: "text-accent-indigo", title: "Non-Custodial", body: "We never hold your keys or tokens. Sign in Leather or Xverse — you stay in full control." },
-              { icon: Brain, color: "text-accent-emerald", title: "Actually Intelligent", body: "Not keyword matching. The AI understands context, compares protocols, and explains DeFi in plain English." },
-              { icon: Zap, color: "text-accent-indigo", title: "Open Protocol", body: "Built on MCP. Any Stacks protocol can plug in their tools — composable, permissionless, and open source." },
-            ].map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="p-8 bg-white border border-app-border rounded-2xl hover:shadow-floating transition-all duration-300"
-              >
-                <item.icon className={`h-10 w-10 ${item.color} mb-5`} />
-                <h3 className="font-serif font-bold text-xl text-text-main mb-3">{item.title}</h3>
-                <p className="text-text-dim leading-relaxed">{item.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Final CTA ── */}
-      <section className="py-32 bg-white border-t border-app-border">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="font-serif font-bold text-5xl md:text-6xl text-text-main leading-tight">
-              Stop clicking.<br />
-              <span className="italic text-accent-indigo">Start talking.</span>
-            </h2>
-            <p className="text-xl text-text-dim">
-              The entire Bitcoin DeFi ecosystem is one message away.
+      {/* Hero */}
+      <section className="pt-32 pb-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <Badge className="mb-6 bg-orange-500/10 text-orange-400 border-orange-500/20 text-xs px-3 py-1">
+              Bitcoin capital in motion · Built on Stacks
+            </Badge>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              Bitcoin capital{" "}
+              <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+                in motion
+              </span>
+            </h1>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+              Accept sBTC payments like Stripe. Deploy idle Bitcoin into DeFi automatically.
+              Non-custodial, condition-based, Bitcoin-native.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-accent-indigo hover:bg-accent-indigo-hover text-white rounded-xl px-10 py-6 text-lg shadow-premium hover:shadow-floating transition-all duration-200 active:scale-95">
-                <Link href="/chat">
-                  Launch App <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-xl px-10 py-6 text-lg border-app-border text-text-dim hover:text-text-main hover:border-accent-indigo/40">
-                <Link href="/docs">Read the Docs</Link>
-              </Button>
-            </div>
-            <div className="flex items-center justify-center gap-8 text-sm text-text-pale pt-4">
-              <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5" /> Bitcoin secured</span>
-              <span className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" /> Non-custodial</span>
-              <span className="flex items-center gap-1.5"><Zap className="h-3.5 w-3.5" /> Open source</span>
+              <Link href="/register">
+                <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white border-0 px-8">
+                  Start building <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+              <Link href="/docs">
+                <Button size="lg" variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-900 px-8">
+                  Read the docs
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Footer ── */}
-      <footer className="bg-app-bg border-t border-app-border py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-            <div className="md:col-span-2 space-y-4">
-              <span className="font-serif font-bold text-xl text-text-main">
-                Stacks<span className="italic text-accent-indigo">AI</span>
-              </span>
-              <p className="text-sm text-text-dim max-w-xs leading-relaxed">
-                Talk to Bitcoin. Access the entire Bitcoin DeFi ecosystem through natural conversation.
-              </p>
-              <Badge className="border-accent-indigo/30 bg-accent-indigo/5 text-accent-indigo text-xs">
-                Built for Stacks Vibe Hackathon
-              </Badge>
-            </div>
-            <div>
-              <h4 className="font-semibold text-text-main text-sm mb-4">Product</h4>
-              <ul className="space-y-2.5 text-sm text-text-dim">
-                {[["Terminal", "/chat"], ["Documentation", "/docs"], ["Roadmap", "/roadmap"], ["About", "/about"]].map(([label, href]) => (
-                  <li key={href}><Link href={href} className="hover:text-text-main transition-colors">{label}</Link></li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-text-main text-sm mb-4">Community</h4>
-              <ul className="space-y-2.5 text-sm text-text-dim">
-                <li>
-                  <a href="https://github.com/Stack-AI-MCP" target="_blank" rel="noreferrer" className="hover:text-text-main transition-colors flex items-center gap-1">
-                    GitHub <ExternalLink className="h-3 w-3" />
-                  </a>
-                </li>
-                <li><a href="#" className="hover:text-text-main transition-colors">Discord</a></li>
-                <li><a href="#" className="hover:text-text-main transition-colors">Twitter</a></li>
-              </ul>
+      {/* Stats */}
+      <section className="py-12 px-4 border-y border-white/5 bg-white/[0.02]">
+        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="text-center"
+            >
+              <stat.icon className="w-5 h-5 text-orange-400 mx-auto mb-2" />
+              <p className="text-3xl font-bold text-white">{stat.value}</p>
+              <p className="text-sm text-gray-500">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Two products, one Bitcoin stack</h2>
+            <p className="text-gray-400 text-lg max-w-xl mx-auto">Everything you need to accept and grow Bitcoin capital — without giving up custody.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {features.map((f, i) => (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.15 }}
+                className="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-gray-600 transition-colors group"
+              >
+                <div className={`w-10 h-10 ${f.bg} rounded-xl flex items-center justify-center mb-4`}>
+                  <f.icon className={`w-5 h-5 ${f.color}`} />
+                </div>
+                <h3 className="font-semibold text-white mb-2">{f.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed mb-4">{f.description}</p>
+                <Link href={f.href} className="text-xs text-orange-400 hover:text-orange-300 flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Explore <ArrowRight className="w-3 h-3" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How vaults work */}
+      <section className="py-20 px-4 bg-white/[0.02] border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-orange-500/10 text-orange-400 border-orange-500/20 text-xs">Dormant Vaults</Badge>
+            <h2 className="text-3xl font-bold mb-4">Your Bitcoin works while you sleep</h2>
+            <p className="text-gray-400 max-w-lg mx-auto">
+              Over 99% of all Bitcoin sits idle. Dormant Vaults let you deploy sBTC into DeFi
+              autonomously — and exit automatically when conditions you set are breached.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {vaultSteps.map((s, i) => (
+              <div key={s.step} className="relative">
+                <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 h-full">
+                  <span className="text-3xl font-bold text-orange-500/30">{s.step}</span>
+                  <h4 className="font-medium text-white text-sm mt-2 mb-1">{s.title}</h4>
+                  <p className="text-xs text-gray-500">{s.desc}</p>
+                </div>
+                {i < vaultSteps.length - 1 && (
+                  <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-px bg-orange-500/40" />
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link href="/dashboard/vaults">
+              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white border-0 px-8">
+                Create a vault <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Protocols */}
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Integrated with Stacks DeFi</h2>
+            <p className="text-gray-400">Live protocol health monitoring across the full ecosystem.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {protocols.map(p => (
+              <div key={p.name} className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex items-center gap-3">
+                <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${p.color} flex items-center justify-center flex-shrink-0`}>
+                  <span className="text-white text-xs font-bold">{p.name[0]}</span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white">{p.name}</p>
+                  <p className="text-xs text-gray-500">{p.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <Link href="/dashboard/protocols" className="text-sm text-orange-400 hover:text-orange-300 flex items-center gap-1 justify-center">
+              View live protocol health <ExternalLink className="w-3 h-3" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 px-4">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="bg-gradient-to-br from-orange-500/10 to-yellow-500/5 border border-orange-500/20 rounded-2xl p-10">
+            <h2 className="text-3xl font-bold mb-4">Ready to activate your Bitcoin?</h2>
+            <p className="text-gray-400 mb-8">Join merchants and Bitcoin holders putting sBTC to work on Stacks.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/register">
+                <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white border-0 px-8">
+                  Get started free <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+              <Link href="/docs">
+                <Button size="lg" variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-900 px-8">
+                  Read the docs
+                </Button>
+              </Link>
             </div>
           </div>
-          <div className="border-t border-app-border mt-10 pt-8 text-center text-xs text-text-pale">
-            © 2026 StacksAI. Built with Bitcoin security.
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/5 py-10 px-4">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+              <span className="text-white font-bold text-xs">₿</span>
+            </div>
+            <span className="text-white font-medium">Lava</span>
+            <span className="text-gray-600">· Bitcoin capital in motion · Built on Stacks</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <Link href="/docs" className="hover:text-white transition-colors">Docs</Link>
+            <Link href="/roadmap" className="hover:text-white transition-colors">Roadmap</Link>
+            <Link href="/about" className="hover:text-white transition-colors">About</Link>
+            <div className="text-gray-600">· Risk rails for productive Bitcoin on Stacks</div>
+  <a href="https://github.com/TheStacksAI" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">GitHub</a>
           </div>
         </div>
       </footer>

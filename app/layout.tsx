@@ -8,14 +8,14 @@ import OnboardingTutorial from "@/components/OnboardingTutorial";
 import PwaRegister from "@/components/PwaRegister";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://stacksai.xyz"),
-  title: "StacksAI - Talk to Bitcoin",
-  description: "Talk to Bitcoin. Access the entire Bitcoin DeFi ecosystem through conversation. Trade on ALEX, Velar, BitFlow. Lend on Arkadiko, Granite. Stack for Bitcoin yields - just by talking.",
+  metadataBase: new URL("https://bitrail.xyz"),
+  title: "Bitrail — Risk Rails for Bitcoin on Stacks",
+  description: "Cross-protocol position monitoring, health scoring, and guarded capital routing for sBTC, stBTC, and Zest positions.",
 };
 
 export const viewport = {
   maximumScale: 1,
-  themeColor: "#5546FF",
+  themeColor: "#EA580C",
 };
 
 export default function RootLayout({
